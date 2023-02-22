@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 
-export default function Logged({ image }: { image: string }) {
+export default function Logged(props: { image: string }) {
   return (
     <li className="flex gap-8 items-center">
       <button
@@ -17,7 +17,7 @@ export default function Logged({ image }: { image: string }) {
         <Image
           width={64}
           height={64}
-          src={image}
+          src={props.image}
           alt="profile-image"
           priority
           className="w-10 rounded-full"
