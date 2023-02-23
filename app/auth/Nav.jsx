@@ -6,7 +6,7 @@ import Logged from './Logged'
 
 export default async function Nav() {
   const session = await getServerSession(authOptions)
-  const img = session.user.image
+  const img = session?.user?.image
 
   return (
     <nav className="flex justify-between items-center py-8">
