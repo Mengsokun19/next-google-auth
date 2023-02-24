@@ -1,8 +1,10 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { PostType } from '../types/Posts'
 
-export default function Post({ avatar, name, postTitle, key }) {
+export default function Post({ avatar, name, postTitle, id, comments }) {
+  console.log(id)
   return (
     <div className="bg-white my-8 p-8 rounded-lg">
       <div className="flex items-center gap-2">
@@ -13,8 +15,8 @@ export default function Post({ avatar, name, postTitle, key }) {
         <p className="break-all">{postTitle}</p>
       </div>
       <div className="flex gap-4 cursor-pointer items-center">
-        <Link href={`/post/${key}`}>
-          <p className="text-sm font-bold text-gray-700">Comment</p>
+        <Link href={`/post/${id}`}>
+          <p className="text-sm font-bold text-gray-700">{comments.length} Comment</p>
         </Link>
       </div>
     </div>

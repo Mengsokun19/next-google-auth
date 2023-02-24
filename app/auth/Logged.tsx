@@ -9,7 +9,7 @@ export default function Logged(props: { image: string }) {
     <li className="flex gap-8 items-center">
       <button
         onClick={() => signOut()}
-        className="bg-gray-700 text-white text-sm px-6 py-2 rounded-md"
+        className="bg-gray-700 text-white text-sm px-6 py-2 rounded-md hover:bg-gray-500"
       >
         Sign Out
       </button>

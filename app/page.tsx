@@ -5,6 +5,7 @@ import AddPost from './components/AddPost'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
 import Post from './components/Post'
+import { PostType } from './types/Post'
 
 // remark: fetch posts
 const allPosts = async () => {
@@ -13,51 +14,23 @@ const allPosts = async () => {
 }
 
 export default function Home() {
-  const { data, error, isLoading } = useQuery({ queryFn: allPosts, queryKey: ['posts'] })
+  const { data, error, isLoading } = useQuery<PostType[]>({
+    queryFn: allPosts,
+    queryKey: ['posts'],
+  })
 
-  if (isLoading)
-    return toast.loading('Loading....🥱', {
-      duration: 4000,
-      position: 'top-center',
+  // if (isLoading) return toast.loading('Loading....🥱')
 
-      // Styling
-      style: {
-        backgroundColor: 'lightYellow',
-        color: 'white',
-        padding: '10px',
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        maxWidth: '500px',
-      },
-
-      // Custom Icon
-      icon: '🤫',
-    })
-  if (error)
-    return toast.error('Something went wrong 🤯', {
-      duration: 4000,
-      position: 'top-center',
-
-      // Styling
-      style: {
-        backgroundColor: 'red',
-        color: 'white',
-        padding: '10px',
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        maxWidth: '500px',
-      },
-
-      // Custom Icon
-      icon: '😌',
-    })
+  if (error) return error
 
   return (
     <main>
       <AddPost />
-      {data?.map((post) => {
+      {data?.map((post: PostType) => {
         return (
           <Post
+            comments={post.comments}
+            id={post.id}
             key={post.id}
             name={post.user.name}
             avatar={post.user.image}

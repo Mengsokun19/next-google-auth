@@ -8,7 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const result = await prisma.post.findMany({
         include: {
-          user: 1,
+          user: true,
+          comments: true,
         },
         orderBy: {
           createdAt: 'desc',

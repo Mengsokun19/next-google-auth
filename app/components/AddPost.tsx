@@ -8,6 +8,8 @@ import toast from 'react-hot-toast'
 export default function CreatePost() {
   const [title, setTitle] = useState('')
   const [isDisable, setIsDisable] = useState(false)
+  //!: keep fetching if the queryKey updated
+  const queryClient = useQueryClient()
 
   // remark: create a post
   const { mutate } = useMutation(
@@ -36,7 +38,7 @@ export default function CreatePost() {
         }
       },
       onSuccess: (data) => {
-        console.log(data)
+        queryClient.invalidateQueries(['posts'])
         toast.success('Post created successfully 🔥', {
           duration: 4000,
           position: 'top-center',
